@@ -1,0 +1,19 @@
+pragma solidity 0.5.1;
+
+contract MyContract {
+    Person[] public people;  //Test addPerson function in Remix: 0 for postion index 0 in array
+    
+    uint256 public peopleCount;
+    
+    struct Person {
+        string _firstname;
+        string _lastname;
+    }
+    
+    function addPerson(string memory _firstname, string memory _lastname) public {
+        people.push(Person(_firstname, _lastname));  //add new person to array
+        //Test addPerson function in Remix: "a","b"
+        peopleCount += 1;
+    }
+
+}
