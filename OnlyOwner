@@ -1,0 +1,39 @@
+pragma solidity 0.5.1;
+
+contract MyContract {
+    uint256 public peopleCount = 0;
+    mapping(uint => Person) public people;
+    
+    address owner;
+    
+    modifier onlyOwner() {
+        require( msg.sender == owner);  //if false make error/revert/wont run/pay gas
+        _;
+    }
+    
+    struct Person {
+        uint256 _id;
+        string _firstname;
+        string _lastname;
+    }
+    
+    constructor() public {  //Set owner = account who call/start smart contract
+        owner = msg.sender;
+    }
+    
+    function addPerson(
+        string memory _firstname,
+        string memory _lastname
+        ) 
+        public 
+        onlyOwner 
+        {
+        incrementCount(); //internal += 1 funciton
+        people[peopleCount] = Person(peopleCount, _firstname, _lastname);
+        }
+    
+    function incrementCount() internal {
+        peopleCount += 1;
+    }
+
+}
