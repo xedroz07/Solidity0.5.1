@@ -1,0 +1,19 @@
+pragma solidity 0.5.1;
+
+contract MyContract {
+    uint256 public peopleCount = 0;
+    mapping(uint => Person) public people;
+    
+    struct Person {
+        uint256 _id;
+        string _firstname;
+        string _lastname;
+    }
+    
+    function addPerson(string memory _firstname, string memory _lastname) public {
+        peopleCount += 1;
+        people[peopleCount] = Person(peopleCount, _firstname, _lastname);
+        
+    }
+
+}
