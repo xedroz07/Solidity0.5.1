@@ -1,0 +1,37 @@
+pragma solidity 0.5.1;
+
+contract MyContract {
+    uint256 public peopleCount = 0;
+    mapping(uint => Person) public people;
+    
+    uint256 openingTime = 1548233946;  //Epochtime in seconds
+    
+    modifier onlyWhileOpen() {
+        require( block.timestamp >= openingTime);  //if false make error/revert/wont run/pay gas
+        _;
+    }
+    
+    struct Person {
+        uint256 _id;
+        string _firstname;
+        string _lastname;
+    }
+    
+
+    
+    function addPerson(
+        string memory _firstname,
+        string memory _lastname
+        ) 
+        public 
+        onlyWhileOpen 
+        {
+        incrementCount(); //internal += 1 funciton
+        people[peopleCount] = Person(peopleCount, _firstname, _lastname);
+        }
+    
+    function incrementCount() internal {
+        peopleCount += 1;
+    }
+
+}
