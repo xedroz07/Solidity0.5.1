@@ -7,6 +7,11 @@ contract MyContract {
         myValue = "myValue";      
     }
     
+    /*  //Long Get method
+     function get() public view returns(string memory){
+        return value;
+    }  */
+    
     function set(string memory _value) public {     //when inputing string in remix set function Add the QUOTES:  ex. "abc"
         myValue = _value;
     }
