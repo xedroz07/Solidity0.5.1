@@ -1,0 +1,13 @@
+pragma solidity 0.5.1;
+
+contract MyContract {
+    string public myValue;    //by setting myValue as public and then giving value in constructor it acts as automatic get() function
+    
+    constructor() public {
+        myValue = "myValue";      
+    }
+    
+    function set(string memory _value) public {     //when inputing string in remix set function Add the QUOTES:  ex. "abc"
+        myValue = _value;
+    }
+}
