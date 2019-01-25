@@ -1,0 +1,28 @@
+pragma solidity 0.5.1;
+
+
+contract MyContract {
+    mapping(address => uint256) public balances;
+    address payable wallet;
+    
+    event Purchase(  //EVENT - Subscribe and listen to all Purchase made
+        address _buyer,
+        uint256 _amount
+        );
+    
+    constructor(address payable _wallet) public {
+        wallet = _wallet;       //When Deploy in Remix - add wallet address 
+    }
+
+    function() external payable { //external modifier = only from outside smart contract
+        buyToken();
+    }
+    
+    function buyToken() public payable {  //declare that this function will accept ether
+        //buy buyToken
+        balances[msg.sender] += 1;  // buy-> add one token    
+        //send ether to the wallet
+        wallet.transfer(msg.value);
+        emit Purchase(msg.sender, 1)  //1 = amount of tokens
+    }
+}
