@@ -1,0 +1,29 @@
+pragma solidity 0.5.1;
+
+contract ERC20Token {
+    string public name;
+    mapping(address => uint256) public balances;
+    
+    function mint() public {
+           balances[tx.origin] ++;  //Gives balance of the address who call mint() function
+    }
+}
+
+contract MyContract {
+    address payable wallet;
+    address public token;
+
+    constructor(address payable _wallet, address _token) public {
+        wallet = _wallet;     
+        token = _token;
+    }
+
+    function() external payable { //external modifier = only from outside smart contract
+        buyToken();
+    }
+    
+    function buyToken() public payable {
+        ERC20Token(address(token))mint();  //myContract knows about ERC20Token contract because in same file
+        wallet.transfer(msg.value);
+    }
+}
